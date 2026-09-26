@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-parchment: #F2EDE4;
+  --color-parchment-deep: #E8E0D2;
+  --color-ink-900: #1B1917;
+  --color-ink-800: #2C2825;
+  --color-ink-600: #555047;
+  --color-ink-400: #857E73;
+  --color-ink-200: #D8D2C6;
+  --color-seal: #B23A2A;
+  --color-seal-dark: #8F271A;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: #F2EDE4;
+    color: #1B1917;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+/* =========================================================================
+   Traditional Calligraphy & Ink Diffusion Curves (墨韵律动)
+   Emulates variable-speed capillary absorption, paper fiber resistance,
+   and the gradual drying of water-bound soot ink on raw Xuan paper (生宣).
+   ========================================================================= */
+
+:root {
+  /* Dynamic timing curves modeling fluid ink contact, dragging resistance & fibrous drying */
+  --ease-ink-strike: cubic-bezier(0.12, 0.98, 0.22, 1);    /* Rapid brush contact settling into parchment */
+  --ease-ink-drag:   cubic-bezier(0.24, 0.72, 0.18, 1);   /* Viscous ink drag across paper grain */
+  --ease-ink-bleed:  cubic-bezier(0.08, 0.85, 0.18, 1);   /* Rapid capillary spread followed by slow dry */
+  --ease-ink-dry:    cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Gentle evaporative settling into fibers */
+  --ease-feibai:     cubic-bezier(0.18, 0.82, 0.25, 1);   /* Dry-brush wisp trailing speed */
+}
+
+/* Calligraphic Entry Animation Keyframes with Variable-Speed Uneven Flow */
+@keyframes inkBleedIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px) brightness(1.28) contrast(0.85);
+    transform: translateY(16px) scale(0.97) skewX(-0.5deg);
+  }
+  24% {
+    /* Initial wet ink deposit: heavy opacity burst with fibrous halation */
+    opacity: 0.65;
+    filter: blur(4.5px) brightness(1.15) contrast(0.92);
+    transform: translateY(8px) scale(0.985) skewX(0.2deg);
+  }
+  58% {
+    /* Capillary diffusion slows as pigment binds to paper fibers */
+    opacity: 0.88;
+    filter: blur(1.5px) brightness(1.04) contrast(0.98);
+    transform: translateY(2px) scale(0.996) skewX(0deg);
+  }
+  82% {
+    /* Ink drying begins: edge crispening */
+    opacity: 0.96;
+    filter: blur(0.4px) brightness(1.01);
+    transform: translateY(0.5px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px) brightness(1) contrast(1);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes brushStrokeHorizontal {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    opacity: 0;
+    transform: scaleX(0.4) skewX(-4deg);
+    filter: blur(3px);
+  }
+  18% {
+    /* Fast brush strike initial acceleration */
+    clip-path: polygon(0 0, 26% 0, 22% 100%, 0 100%);
+    opacity: 0.95;
+    transform: scaleX(0.75) skewX(-2deg);
+    filter: blur(1.5px);
+  }
+  42% {
+    /* Resistance across parchment grain (subtle momentary hesitation) */
+    clip-path: polygon(0 0, 52% 0, 48% 100%, 0 100%);
+    opacity: 0.9;
+    transform: scaleX(0.9) skewX(0deg);
+    filter: blur(0.8px);
+  }
+  75% {
+    /* Final sweep pull-through */
+    clip-path: polygon(0 0, 88% 0, 85% 100%, 0 100%);
+    opacity: 0.92;
+    transform: scaleX(0.98) skewX(1deg);
+    filter: blur(0.2px);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 0.92;
+    transform: scaleX(1) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes inkWashFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(14px) contrast(0.7) brightness(1.1);
+    transform: scale(1.05) translateY(8px);
+  }
+  30% {
+    /* Atmospheric moisture expansion */
+    opacity: 0.45;
+    filter: blur(8px) contrast(0.82) brightness(1.05);
+    transform: scale(1.025) translateY(4px);
+  }
+  70% {
+    /* Pigment settling into fiber valleys */
+    opacity: 0.78;
+    filter: blur(2.5px) contrast(0.94);
+    transform: scale(1.008) translateY(1px);
+  }
+  100% {
+    opacity: 0.8;
+    filter: blur(0px) contrast(1) brightness(1);
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Calligraphic stroke sweep classes */
+.animate-ink-bleed {
+  animation: inkBleedIn 1.15s var(--ease-ink-bleed) forwards;
+}
+
+.animate-brush-sweep {
+  animation: brushStrokeHorizontal 1.35s var(--ease-ink-drag) forwards;
+}
+
+.animate-ink-wash {
+  animation: inkWashFadeIn 1.6s var(--ease-ink-dry) forwards;
+}
+
+/* Parchment paper tactile fiber grain */
+.bg-parchment-texture {
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.45) 0%, rgba(242,237,228,0) 70%),
+    radial-gradient(circle at 10% 30%, rgba(215, 203, 185, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(200, 188, 170, 0.25) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.038'/%3E%3C/svg%3E");
+}
+
+/* Mist Drift Animation (Always running very slowly) */
+@keyframes mistDriftSlow {
+  0% {
+    transform: translate3d(-3%, 0, 0);
+  }
+  50% {
+    transform: translate3d(3%, -1%, 0);
+  }
+  100% {
+    transform: translate3d(-3%, 0, 0);
+  }
+}
+
+@keyframes mistDriftReverse {
+  0% {
+    transform: translate3d(4%, 1%, 0);
+  }
+  50% {
+    transform: translate3d(-2%, 0, 0);
+  }
+  100% {
+    transform: translate3d(4%, 1%, 0);
+  }
+}
+
+.animate-mist-slow {
+  animation: mistDriftSlow 48s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-mist-reverse {
+  animation: mistDriftReverse 64s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Page load stamp slam animation */
+@keyframes sealStampSlam {
+  0% {
+    transform: scale(2.4) rotate(-8deg);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  60% {
+    transform: scale(0.92) rotate(1deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  80% {
+    transform: scale(1.05) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-seal-stamp {
+  animation: sealStampSlam 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* Sword-cut wipe transition (剑气一瞬 - diagonal diagonal slice) */
+@keyframes swordCutFlash {
+  0% {
+    opacity: 0;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    transform: scale(0.98);
+  }
+  30% {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 0 100%, 0 100%);
+  }
+  100% {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: scale(1);
+  }
+}
+
+@keyframes swordSlashLine {
+  0% {
+    transform: translateX(-120%) translateY(-120%) rotate(-45deg);
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(180%) translateY(180%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.animate-sword-cut {
+  animation: swordCutFlash 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slash-line {
+  animation: swordSlashLine 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Calligraphic ink stroke draw-in with fibrous uneven flow */
+.draw-stroke-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.45s var(--ease-ink-drag);
+}
+
+.draw-stroke-path.drawn {
+  stroke-dashoffset: 0;
+}
+
+/* Enso circle stroke draw-in with variable speed brush cadence */
+.draw-enso-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 1.9s cubic-bezier(0.19, 0.94, 0.22, 1);
+}
+
+.draw-enso-path.drawn {
+  stroke-dashoffset: 0;
+}
+
+/* Red Seal Chop (印章) tactile texture */
+.seal-chop {
+  position: relative;
+  background-color: #B23A2A;
+  box-shadow: 
+    0 1px 2px rgba(178, 58, 42, 0.2),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.2),
+    inset 0 1px 3px rgba(0, 0, 0, 0.25);
+  mask-image: radial-gradient(circle at 50% 50%, black 95%, transparent 100%);
+  clip-path: polygon(
+    2% 3%, 15% 1%, 35% 2%, 60% 0%, 85% 2%, 98% 3%,
+    99% 25%, 98% 50%, 100% 75%, 97% 97%,
+    75% 99%, 45% 98%, 20% 100%, 2% 98%,
+    1% 75%, 3% 50%, 0% 25%
+  );
+}
+
+/* Wabi-sabi Ink Brush Underline SVG Mask */
+.brush-underline {
+  background: #1B1917;
+  height: 9px;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+/* Custom minimal parchment scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #E8E2D7;
+}
+::-webkit-scrollbar-thumb {
+  background: #B6ACA0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8E8478;
+}
+
