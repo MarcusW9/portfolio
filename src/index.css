@@ -222,6 +222,27 @@
   animation: sealStampSlam 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
 }
 
+/* Soft fade for modals, pop-ups and expanded details (opacity only, so it
+   never fights the element's own positioning transforms) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s var(--ease-ink-dry) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn {
+    animation: none;
+  }
+}
+
 /* Sword-cut wipe transition (剑气一瞬 - diagonal diagonal slice) */
 @keyframes swordCutFlash {
   0% {
