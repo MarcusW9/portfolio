@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from '../lib/gsap.ts';
 
 interface StrokePoint {
   x: number;
@@ -35,7 +36,13 @@ export const HeroInkCanvas: React.FC<HeroInkCanvasProps> = ({ heroRef }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animId: number;
+    // Driven by the gsap ticker, and only while there is ink to draw
+    let running = false;
+    const wake = () => {
+      if (running) return;
+      running = true;
+      gsap.ticker.add(render);
+    };
 
     // Smooth spring lerp for silky brush feel
     let mouseX = -100;
@@ -116,6 +123,7 @@ export const HeroInkCanvas: React.FC<HeroInkCanvasProps> = ({ heroRef }) => {
       }
 
       setHintVisible(false);
+      wake();
 
       if (!isInteracting || smoothX < -50) {
         smoothX = x;
@@ -138,6 +146,7 @@ export const HeroInkCanvas: React.FC<HeroInkCanvasProps> = ({ heroRef }) => {
       if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
         setHintVisible(false);
         createBloom(x, y, true);
+        wake();
         smoothX = x;
         smoothY = y;
         mouseX = x;
@@ -336,17 +345,19 @@ export const HeroInkCanvas: React.FC<HeroInkCanvasProps> = ({ heroRef }) => {
         }
       }
 
-      animId = requestAnimationFrame(render);
+      // Fall asleep once the ink has faded and the brush is off the paper
+      if (!isInteracting && strokes.length === 0 && activeStroke.length === 0 && blooms.length === 0) {
+        gsap.ticker.remove(render);
+        running = false;
+      }
     };
-
-    render();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       heroEl.removeEventListener('pointermove', handlePointerMove);
       heroEl.removeEventListener('pointerdown', handlePointerDown);
       heroEl.removeEventListener('pointerleave', handlePointerLeave);
-      cancelAnimationFrame(animId);
+      gsap.ticker.remove(render);
     };
   }, [heroRef]);
 
