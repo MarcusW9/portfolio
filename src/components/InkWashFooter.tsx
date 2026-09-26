@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { gsap, useGSAP } from '../lib/gsap.ts';
+import footerMountains from '../assets/images/footer_misty_mountains_1790415016091.jpg';
 
 interface InkWashFooterProps {
   className?: string;
-  scrollY?: number;
 }
 
 export const InkWashFooter: React.FC<InkWashFooterProps> = ({
-  className = '',
-  scrollY = 0
+  className = ''
 }) => {
+  const footerRef = useRef<HTMLElement | null>(null);
+
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    // Mountains rise gently into place as the footer scrolls into view
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.fromTo('[data-footer="mountains"]', { y: 20 }, {
+        y: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top bottom',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+      });
+    });
+  }, { scope: footerRef });
+
   return (
-    <footer className={`relative w-full overflow-hidden select-none ${className}`}>
+    <footer ref={footerRef} className={`relative w-full overflow-hidden select-none ${className}`}>
       {/* 1. Organic Transition Calligraphy Brush Divider */}
       <div className="relative w-full overflow-hidden pointer-events-none py-2">
         <svg
@@ -48,15 +67,12 @@ export const InkWashFooter: React.FC<InkWashFooterProps> = ({
         
         {/* Layer A: Parallax ink wash mountain painting with organic paper bleed */}
         <div
+          data-footer="mountains"
           className="absolute inset-0 w-full h-[130%] -top-[15%] will-change-transform"
-          style={{
-            transform: `translate3d(0, ${-(scrollY * 0.04) % 20}px, 0)`
-          }}
         >
           <img
-            src="/src/assets/images/footer_misty_mountains_1790415016091.jpg"
+            src={footerMountains}
             alt="Misty ink wash mountains along bottom horizon"
-            referrerPolicy="no-referrer"
             className="w-full h-full object-cover object-bottom mix-blend-multiply opacity-80"
           />
         </div>

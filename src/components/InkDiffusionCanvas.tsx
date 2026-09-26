@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { gsap } from '../lib/gsap.ts';
 
 interface InkDrop {
   x: number;
@@ -25,7 +26,13 @@ export const InkDiffusionCanvas: React.FC<InkDiffusionCanvasProps> = ({ enabled 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animId: number;
+    // Driven by the gsap ticker, and only while a drop is still spreading
+    let running = false;
+    const wake = () => {
+      if (running) return;
+      running = true;
+      gsap.ticker.add(render);
+    };
 
     const handleResize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -77,6 +84,8 @@ export const InkDiffusionCanvas: React.FC<InkDiffusionCanvasProps> = ({ enabled 
       if (dropsRef.current.length > 10) {
         dropsRef.current.shift();
       }
+
+      wake();
     };
 
     window.addEventListener('click', handleClick);
@@ -123,15 +132,16 @@ export const InkDiffusionCanvas: React.FC<InkDiffusionCanvasProps> = ({ enabled 
         ctx.restore();
       }
 
-      animId = requestAnimationFrame(render);
+      if (dropsRef.current.length === 0) {
+        gsap.ticker.remove(render);
+        running = false;
+      }
     };
-
-    render();
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('click', handleClick);
-      cancelAnimationFrame(animId);
+      gsap.ticker.remove(render);
     };
   }, [enabled]);
 

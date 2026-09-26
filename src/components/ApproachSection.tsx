@@ -1,28 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { gsap, useGSAP, EASE } from '../lib/gsap.ts';
 import { PRINCIPLES } from '../data/portfolioData.ts';
 
 export const ApproachSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [ensoInView, setEnsoInView] = useState(false);
   const ensoRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setEnsoInView(true);
-          observer.disconnect(); // Draw in once only
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (ensoRef.current) {
-      observer.observe(ensoRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    // The ensō is painted once, the first time it scrolls into view
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.timeline({
+        scrollTrigger: { trigger: ensoRef.current, start: 'top 80%', once: true },
+      })
+        .from('[data-enso="stroke"]', { strokeDashoffset: 1000, duration: 1.8, ease: EASE.drag })
+        .from('[data-enso="inner"]', { strokeDashoffset: 900, duration: 1.6, ease: EASE.feibai }, 0.32)
+        .from('[data-enso="outer"]', { strokeDashoffset: 950, duration: 1.4, ease: EASE.feibai }, 0.56)
+        .fromTo('[data-enso="quote"]',
+          { opacity: 0, scale: 0.95, filter: 'blur(2px)' },
+          { opacity: 1, scale: 1, filter: 'blur(0px)', clearProps: 'filter', duration: 1, ease: EASE.bleed }, 0.85);
+    });
+  }, { scope: ensoRef });
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
@@ -62,11 +60,9 @@ export const ApproachSection: React.FC = () => {
                   strokeWidth="24"
                   strokeLinecap="round"
                   strokeDasharray="1000"
-                  strokeDashoffset={ensoInView ? '0' : '1000'}
-                  className="opacity-85 transition-all duration-1800"
-                  style={{
-                    transitionTimingFunction: 'var(--ease-ink-drag)'
-                  }}
+                  strokeDashoffset="0"
+                  data-enso="stroke"
+                  opacity="0.85"
                 />
                 {/* Inner dry-brush feathering */}
                 <path
@@ -75,36 +71,25 @@ export const ApproachSection: React.FC = () => {
                   strokeWidth="4"
                   strokeLinecap="round"
                   strokeDasharray="900"
-                  strokeDashoffset={ensoInView ? '0' : '900'}
-                  className="opacity-45 transition-all duration-1600"
-                  style={{
-                    transitionDelay: ensoInView ? '320ms' : '0ms',
-                    transitionTimingFunction: 'var(--ease-feibai)'
-                  }}
+                  strokeDashoffset="0"
+                  data-enso="inner"
+                  opacity="0.45"
                 />
                 <path
                   d="M190,38 C290,40 366,108 368,202 C370,296 294,368 200,370 C106,372 36,296 34,202 C32,130 76,70 150,42"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="950"
-                  strokeDashoffset={ensoInView ? '0' : '950'}
-                  className="opacity-30 transition-all duration-1400"
-                  style={{
-                    transitionDelay: ensoInView ? '560ms' : '0ms',
-                    transitionTimingFunction: 'var(--ease-feibai)'
-                  }}
+                  strokeDashoffset="0"
+                  data-enso="outer"
+                  opacity="0.3"
                 />
               </svg>
 
               {/* Centered Wabi-sabi Quote with enhanced breathing gap from the calligraphic perimeter */}
               <div
-                className={`relative z-10 max-w-[190px] sm:max-w-[215px] md:max-w-[225px] text-center transition-all duration-1000 ${
-                  ensoInView ? 'opacity-100 scale-100 filter-none' : 'opacity-0 scale-95 blur-[2px]'
-                }`}
-                style={{
-                  transitionDelay: ensoInView ? '850ms' : '0ms',
-                  transitionTimingFunction: 'var(--ease-ink-bleed)'
-                }}
+                data-enso="quote"
+                className="relative z-10 max-w-[190px] sm:max-w-[215px] md:max-w-[225px] text-center"
               >
                 <blockquote className="font-serif text-base sm:text-lg md:text-[1.18rem] leading-relaxed text-[#1B1917] italic font-normal">
                   &ldquo;AI makes building easy. Knowing what to build is still the craft.&rdquo;
