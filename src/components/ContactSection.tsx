@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { SealChop } from './SealChop.tsx';
 
-interface ContactSectionProps {
-  onOpenContactModal?: () => void;
-  scrollY?: number;
-}
-
-export const ContactSection: React.FC<ContactSectionProps> = ({ scrollY = 0 }) => {
+export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {

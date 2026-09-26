@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigation } from './components/Navigation.tsx';
 import { Hero } from './components/Hero.tsx';
 import { AboutSection } from './components/AboutSection.tsx';
@@ -18,25 +18,8 @@ import { ContactModal } from './components/ContactModal.tsx';
 import { CaseStudy } from './data/portfolioData.ts';
 
 export default function App() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setScrollY(currentScroll);
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const progress = Math.min(1, Math.max(0, currentScroll / totalScroll));
-        setScrollProgress(progress);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleScrollToWork = () => {
     const el = document.getElementById('work');
@@ -59,7 +42,7 @@ export default function App() {
 
       {/* Fluid Calligraphic Scroll Ribbon (Directly echoing Image 3) */}
       <div className="fixed right-0 md:right-4 top-0 bottom-0 w-16 md:w-24 pointer-events-none z-20">
-        <FluidScrollRibbon scrollProgress={scrollProgress} className="w-full h-full" />
+        <FluidScrollRibbon className="w-full h-full" />
       </div>
 
       {/* Top Bar Navigation */}
@@ -72,7 +55,6 @@ export default function App() {
         <Hero
           onViewWork={handleScrollToWork}
           onContactClick={handleScrollToContact}
-          scrollY={scrollY}
         />
 
         <AboutSection />
@@ -81,13 +63,11 @@ export default function App() {
 
         <ApproachSection />
 
-        <ContactSection
-          scrollY={scrollY}
-        />
+        <ContactSection />
       </main>
 
       {/* Ink-wash footer extending organically from bottom of page */}
-      <InkWashFooter scrollY={scrollY} />
+      <InkWashFooter />
 
       {/* Modals */}
       <CaseStudyModal
