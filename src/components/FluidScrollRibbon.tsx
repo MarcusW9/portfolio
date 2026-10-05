@@ -10,10 +10,15 @@ interface FluidScrollRibbonProps {
  * ScrollTrigger scrubs the reveal; the gsap ticker keeps the ink gently
  * flowing. With reduced motion it is drawn once, fully revealed and still.
  */
+// The canvas extends this far past the ribbon's lane on each side, so the
+// swinging curves and their soft ink halo are never cut off at the edges
+const BLEED = 48;
+
 export const FluidScrollRibbon: React.FC<FluidScrollRibbonProps> = ({
   className = ''
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
 
   useGSAP(() => {
     const canvas = canvasRef.current;
@@ -36,6 +41,7 @@ export const FluidScrollRibbon: React.FC<FluidScrollRibbonProps> = ({
       const visibleSteps = Math.floor(steps * activeLength);
 
       const centerX = width / 2;
+      const lane = Math.max(0, width - BLEED * 2);
 
       // Draw overlapping fluid ink calligraphy loops
       for (let i = 0; i < visibleSteps; i++) {
@@ -43,8 +49,8 @@ export const FluidScrollRibbon: React.FC<FluidScrollRibbonProps> = ({
         const y = t * height;
 
         // Dynamic fluid wave harmonics
-        const wave1 = Math.sin(t * Math.PI * 4 + time * 0.4) * (width * 0.3);
-        const wave2 = Math.sin(t * Math.PI * 7 - time * 0.25) * (width * 0.12);
+        const wave1 = Math.sin(t * Math.PI * 4 + time * 0.4) * (lane * 0.3);
+        const wave2 = Math.sin(t * Math.PI * 7 - time * 0.25) * (lane * 0.12);
         const x = centerX + wave1 + wave2;
 
         // Radius variations along the spine
@@ -87,7 +93,7 @@ export const FluidScrollRibbon: React.FC<FluidScrollRibbonProps> = ({
       if (visibleSteps > 0 && visibleSteps < steps) {
         const tTip = visibleSteps / steps;
         const tipY = tTip * height;
-        const tipX = centerX + Math.sin(tTip * Math.PI * 4 + time * 0.4) * (width * 0.3) + Math.sin(tTip * Math.PI * 7 - time * 0.25) * (width * 0.12);
+        const tipX = centerX + Math.sin(tTip * Math.PI * 4 + time * 0.4) * (lane * 0.3) + Math.sin(tTip * Math.PI * 7 - time * 0.25) * (lane * 0.12);
 
         ctx.save();
         ctx.translate(tipX, tipY);
@@ -151,11 +157,12 @@ export const FluidScrollRibbon: React.FC<FluidScrollRibbonProps> = ({
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none select-none ${className}`}
+      className={`relative pointer-events-none select-none ${className}`}
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full opacity-60"
+        className="absolute top-0 h-full opacity-60"
+        style={{ left: -BLEED, width: `calc(100% + ${BLEED * 2}px)` }}
       />
     </div>
   );
