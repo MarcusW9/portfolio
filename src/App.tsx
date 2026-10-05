@@ -14,12 +14,10 @@ import { FluidScrollRibbon } from './components/FluidScrollRibbon.tsx';
 import { InkDiffusionCanvas } from './components/InkDiffusionCanvas.tsx';
 import { InkWashFooter } from './components/InkWashFooter.tsx';
 import { CaseStudyModal } from './components/CaseStudyModal.tsx';
-import { ContactModal } from './components/ContactModal.tsx';
 import { CaseStudy } from './data/portfolioData.ts';
 
 export default function App() {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleScrollToWork = () => {
     const el = document.getElementById('work');
@@ -69,15 +67,10 @@ export default function App() {
       {/* Ink-wash footer extending organically from bottom of page */}
       <InkWashFooter />
 
-      {/* Modals */}
+      {/* Case study modal */}
       <CaseStudyModal
         study={selectedCaseStudy}
         onClose={() => setSelectedCaseStudy(null)}
-      />
-
-      <ContactModal
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
       />
     </div>
   );
