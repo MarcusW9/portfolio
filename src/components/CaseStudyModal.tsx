@@ -102,7 +102,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ study, onClose }
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {study.strategy.map((item, idx) => {
-                const [headline, detail] = item.split(': ');
+                // Split on the first ": " only, so details can contain colons
+                const splitAt = item.indexOf(': ');
+                const headline = splitAt === -1 ? item : item.slice(0, splitAt);
+                const detail = splitAt === -1 ? '' : item.slice(splitAt + 2);
                 return (
                   <div key={idx} className="p-4 bg-[#EAE3D6]/50 border-t-2 border-[#1B1917] space-y-1.5">
                     <span className="font-serif text-base font-medium text-[#1B1917] block">

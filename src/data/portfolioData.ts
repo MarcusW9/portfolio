@@ -16,18 +16,14 @@ export interface CaseStudy {
   highlightMetric: string;
   highlightLabel: string;
   overview: string;
-  context: string;
   problem: string;
+  /** Exactly three items, each written as "Headline: detail" */
   strategy: string[];
-  deliverables: string[];
+  /** Exactly three outcomes */
   outcomes: {
     stat: string;
     label: string;
   }[];
-  quote?: {
-    text: string;
-    author: string;
-  };
 }
 
 export interface Principle {
@@ -45,28 +41,28 @@ export const METRICS: MetricItem[] = [
     value: "£12m+",
     label: "GMV",
     sublabel: "Argos Marketplace",
-    detail: "Scaled from zero third-party sellers to a high-throughput multi-category marketplace catalogue integrated with Sainsbury's core checkout."
+    detail: "GMV since launch from Argos's first marketplace, which I led from vendor selection to go-live. It has also brought in over £1m in commission revenue."
   },
   {
     id: "savings",
     value: "£300K",
     label: "saved with an AI-built MVP",
     sublabel: "Argos Labs",
-    detail: "Replaced high-overhead SaaS evaluation and 800 spreadsheet tracker rows with a rapid in-house partner ingestion engine in 6 weeks."
+    detail: "Estimated engineering cost avoided by building an in-house partner platform in six weeks, which replaced 800 spreadsheet rows and any licence fees."
   },
   {
     id: "downloads",
     value: "160k+",
     label: "app downloads",
     sublabel: "YoungPlanet",
-    detail: "Engineered organic viral loops, retention gamification, and streamlined onboarding for a circular economy parenting community."
+    detail: "A free app for parents to pass on outgrown children's items to families nearby, with more than 35,000 items listed across the UK."
   },
   {
     id: "growth",
     value: "20×",
     label: "user growth in 11 months",
-    sublabel: "Community Scale",
-    detail: "Expanded user liquidity across major UK metropolitan hubs before orchestrating pilot expansion into overseas markets."
+    sublabel: "Mashroom",
+    detail: "From under 1,000 to 20,000 landlords and tenants, after we shipped the company's first paid product."
   }
 ];
 
@@ -80,92 +76,84 @@ export const CASE_STUDIES: CaseStudy[] = [
     summary: "Argos had never sold third-party stock. I led the programme that gave it a seller platform, a catalogue model and a new commission revenue line.",
     highlightMetric: "£12m+",
     highlightLabel: "GMV since launch",
-    overview: "Argos operates one of the UK's most beloved and complex retail logistics networks. To expand range without capital inventory risk, we conceived and executed the retailer's first 3P marketplace from ground up.",
-    context: "Sainsbury's Group wanted to expand long-tail catalogue assortment in toys, home, and consumer electronics without purchasing warehouse inventory or incurring balance sheet risk.",
-    problem: "Fifty years of legacy mainframe architecture, siloed stock keeping, and strict SLA fulfillment expectations meant a standard drop-in third-party marketplace would disintegrate without unified data contracts.",
+    overview: "Argos wanted to grow its range without holding more stock, which meant building capabilities it had never run before: seller onboarding, product ingestion, marketplace orders and payouts.",
+    problem: "The investment case ran past £20m, and more than five delivery teams each owned a piece of the flow. Taxonomy was the one area we did not compromise on, because bad category data blocks search, browse and every seller who comes after.",
     strategy: [
-      "Unified Catalogue Ingestion: Designed schema normalizing 200k+ seller SKUs into Argos standard taxonomic hierarchies in minutes.",
-      "Strict SLA Settlement: Embedded automated order validation and track-and-trace webhooks to safeguard brand trust.",
-      "Cross-Functional Governance: Aligned 4 engineering squads, legal, supply chain operations, and commercial supplier onboarding."
-    ],
-    deliverables: [
-      "Seller Portal MVP (Authentication, SKU mapping, Inventory sync)",
-      "Real-time Catalogue Reconciliation Engine",
-      "Dynamic Seller Rating & Commission Settlement Module"
+      "Buy over build: I wrote the procurement RFP and led the vendor evaluation, landing on Mirakl. Buying the platform gave up some control of the roadmap in exchange for launch speed.",
+      "Connect sellers sooner: I pushed for iPaaS integration over a long internal build, and aligned API schemas and system behaviour with Engineering and Architecture.",
+      "Settle data ownership early: I ran workshops on who owns each core flow, then cut the MVP to what launch actually needed."
     ],
     outcomes: [
-      { stat: "£12m+", label: "Gross Merchandise Value within first 9 months" },
-      { stat: "99.4%", label: "On-time seller dispatch fulfillment rate" },
-      { stat: "340k+", label: "New unique customer orders processed" }
-    ],
-    quote: {
-      text: "Marcus bridged 50 years of retail tradition with modern marketplace speed. The seller platform transformed how our category directors view catalogue growth.",
-      author: "Director of Digital Product, Sainsbury's Tech"
-    }
+      { stat: "£12m+", label: "GMV since launch" },
+      { stat: "£1m+", label: "Commission revenue" },
+      { stat: "20k", label: "New SKUs on Argos channels" }
+    ]
   },
   {
     id: "argos-labs",
     index: "02",
     client: "SAINSBURY'S · ARGOS LABS",
-    role: "Founding Product Member",
-    title: "Building a CRM worth six figures in six weeks",
+    role: "Senior Product Manager · Founding member",
+    title: "Build, don't buy: a partner platform in six weeks",
     summary: "As a founding member of Argos Labs, I replaced 800 spreadsheet rows with an in-house partner platform.",
     highlightMetric: "£300K",
     highlightLabel: "engineering cost avoided",
-    overview: "Supplier onboarding and partner compliance was trapped in fragmented spreadsheets, slow email chains, and manual PDF approvals. We built a purpose-crafted internal orchestration tool in 6 weeks using modern AI-assisted engineering.",
-    context: "Commercial buyers were spending ~14 hours per week copying partner credential data and tax compliance status across disconnected ERP instances.",
-    problem: "Enterprise SaaS vendors quoted £300k+ in upfront implementation fees and a 9-month delivery roadmap for what was fundamentally a state-machine data collection workflow.",
+    overview: "Argos Labs is a small team Argos UK set up to solve business problems quickly with AI-led development. I joined as a founding member alongside my Marketplace role.",
+    problem: "Hundreds of seller submissions arrived through forms and landed in large spreadsheets. Nobody clearly owned each stage, onboarding steps were missed and compliance tracking was manual. Commercial quotes ran to hundreds of thousands of pounds, with long integration timelines.",
     strategy: [
-      "Runnable PRDs: Wrote interactive runnable PRDs with live schemas rather than 60-page static documents.",
-      "AI-Assisted Scaffolding: Leveraged LLM code gen paired with strict TypeScript validation to ship the core admin workflow in 14 days.",
-      "Frictionless User Migration: Imported historical data directly from 800 messy spreadsheet rows with automated sanity verification."
-    ],
-    deliverables: [
-      "Partner Registration & Self-Service Document Ingestion UI",
-      "Automated Compliance & Sanctions Check Pipeline",
-      "Audit Trail & ERP Integration Webhooks"
+      "One pipeline per stage: Separate pipelines for acquisition, onboarding and account management, each with its own stages and owners.",
+      "Rules that protect compliance: Progression rules and warnings stop a seller from skipping a compliance step.",
+      "A single seller record: Data, files, notes and full history in one place, built by one PM and one engineer using AI for wireframes, screens and code."
     ],
     outcomes: [
-      { stat: "6 Weeks", label: "Idea to production go-live" },
-      { stat: "£300K", label: "Third-party vendor SaaS budget conserved" },
-      { stat: "82%", label: "Reduction in partner onboarding cycle time" }
-    ],
-    quote: {
-      text: "The speed of execution was unprecedented for Sainsbury's Tech. Marcus demonstrated that high taste, sharp constraints, and AI prototyping outrun heavy legacy roadmaps.",
-      author: "Head of Argos Labs Innovation"
-    }
+      { stat: "6 weeks", label: "From brief to working MVP" },
+      { stat: "£300K", label: "Estimated engineering cost avoided" },
+      { stat: "£0", label: "Licence fees, fully owned in-house" }
+    ]
   },
   {
     id: "youngplanet",
     index: "03",
     client: "YOUNGPLANET",
-    role: "Head of Product",
+    role: "Product Lead",
     title: "Turning a free parents' app into a business",
     summary: "Growing the community, finding ways to earn from it, and taking it abroad.",
     highlightMetric: "160k+",
     highlightLabel: "app downloads",
-    overview: "YoungPlanet pioneered zero-waste circular exchange for parents, enabling millions of children's items to find second homes. Transitioned the product from an idealistic grant-funded prototype into an economically sustainable, venture-backed platform.",
-    context: "High organic user love, but zero monetization mechanics and looming server infrastructure costs risked killing the community.",
-    problem: "Introducing aggressive monetization could destroy trust and the altruistic community ethos that powered viral word-of-mouth growth.",
+    overview: "YoungPlanet lets parents pass on outgrown children's items to families nearby. I owned the product end to end, working day to day with the founders.",
+    problem: "The app grew because it was free and useful, but the circular model left little to charge parents for. The business needed income that did not put a paywall between families, so every revenue idea was tested against one question: does it make giving and getting items any harder?",
     strategy: [
       "Free for Parents, Paid by Partners: Kept the app free for families by monetising the community instead: a £12k in-app ad contract with a consumer brand and an employer partnership with Travis Perkins reaching 40k employees.",
       "More Givers, More Listings: Grew active listings by 20% through referrals, gamified rewards for generous parents and funnel improvements that made listing an item quicker and easier.",
-      "International Expansion Playbook: Structured modular localization architectures to launch the app across international test cities."
-    ],
-    deliverables: [
-      "Native iOS & Android UX Overhaul (React Native)",
-      "In-App Ad & B2B Employer Benefit Integration",
-      "Automated Geo-Clustering & Safety Moderation AI"
+      "Taking it abroad: Launched in two European markets, covering translation, communications and GDPR."
     ],
     outcomes: [
-      { stat: "160k+", label: "Parent downloads achieved organically" },
-      { stat: "5×", label: "Active monthly listings" },
-      { stat: "ITV", label: "Covered for family tech innovations" }
+      { stat: "160k+", label: "App downloads" },
+      { stat: "35k+", label: "Items listed across the UK" },
+      { stat: "40k", label: "Employees reached through the Travis Perkins deal" }
+    ]
+  },
+  {
+    id: "mashroom",
+    index: "04",
+    client: "MASHROOM",
+    role: "Junior Product Manager · Second product hire",
+    title: "From pre-revenue to 20,000 landlords and tenants",
+    summary: "A PropTech start-up for DIY landlords with under 1,000 users and no revenue. In eleven months we shipped its first paid product and grew twentyfold.",
+    highlightMetric: "20×",
+    highlightLabel: "user growth in 11 months",
+    overview: "Landlords liked Mashroom's free tools, but the company earned nothing from them. We needed a first paid product that fitted how self-managing landlords already worked, and enough traffic to prove it.",
+    problem: "As the second product hire, I ran sprints and prioritisation for an offshore development team, worked with the CEO on the product vision and co-presented investor demos. Because deposits and repairs were payments landlords made anyway, we built the first paid products around them, then used A/B tests, user interviews and BigQuery funnel analysis to lift conversion on the deposit flow by 20%.",
+    strategy: [
+      "Deposit Replacement Scheme: Spread payments across the year, a clear difference from competitors, which needed FCA approval and financial integrations.",
+      "Maintenance marketplace: Tenants report issues, landlords book a tradesperson in the app, and Mashroom takes a commission.",
+      "Search-led growth: SEO changes that doubled the user base in a single quarter."
     ],
-    quote: {
-      text: "Marcus preserved the heart and soul of our parent community while giving us the monetization engine and product rigor needed to scale internationally.",
-      author: "Co-Founder & CEO, YoungPlanet"
-    }
+    outcomes: [
+      { stat: "20×", label: "Users, from under 1k to 20k in 11 months" },
+      { stat: "+20%", label: "Conversion on deposit replacement" },
+      { stat: "500", label: "Property listings from zero" }
+    ]
   }
 ];
 
