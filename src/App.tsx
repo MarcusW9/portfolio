@@ -9,6 +9,7 @@ import { Hero } from './components/Hero.tsx';
 import { AboutSection } from './components/AboutSection.tsx';
 import { SelectedWork } from './components/SelectedWork.tsx';
 import { ApproachSection } from './components/ApproachSection.tsx';
+import { SideProjects } from './components/SideProjects.tsx';
 import { ContactSection } from './components/ContactSection.tsx';
 import { FluidScrollRibbon } from './components/FluidScrollRibbon.tsx';
 import { InkDiffusionCanvas } from './components/InkDiffusionCanvas.tsx';
@@ -58,6 +59,8 @@ export default function App() {
         <AboutSection />
 
         <SelectedWork onSelectCaseStudy={(study) => setSelectedCaseStudy(study)} />
+
+        <SideProjects />
 
         <ApproachSection />
 
