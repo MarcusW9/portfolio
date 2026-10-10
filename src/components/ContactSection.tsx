@@ -24,11 +24,22 @@ export const ContactSection: React.FC = () => {
             </h2>
 
             <p className="font-serif text-xl sm:text-2xl text-[#454038] font-light max-w-lg mb-8 leading-snug">
-              Open to Senior and Lead product roles.
+              Open to Senior, Lead and Head of Product roles.
             </p>
 
             {/* Social & Profile Links */}
             <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold text-[#1B1917]">
+              <a
+                href={`${import.meta.env.BASE_URL}Marcus-Wong-CV.pdf`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group relative pb-1 text-[#1B1917] hover:text-[#B23A2A] transition-colors inline-flex items-center gap-1"
+              >
+                <span>DOWNLOAD CV</span>
+                <span className="text-xs leading-none">↓</span>
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#1B1917] group-hover:bg-[#B23A2A] transition-colors" />
+              </a>
+
               <a
                 href="https://www.linkedin.com/in/marcus-wong-0451a817b/"
                 target="_blank"
