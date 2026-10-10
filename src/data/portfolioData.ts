@@ -26,6 +26,19 @@ export interface CaseStudy {
   }[];
 }
 
+export interface SideProject {
+  id: string;
+  label: string;
+  title: string;
+  hanzi: string;
+  summary: string;
+  /** Each written as "Headline: detail" */
+  decisions: string[];
+  playUrl: string;
+  codeUrl: string;
+  note: string;
+}
+
 export interface Principle {
   id: string;
   title: string;
@@ -154,6 +167,24 @@ export const CASE_STUDIES: CaseStudy[] = [
       { stat: "+20%", label: "Conversion on deposit replacement" },
       { stat: "500", label: "Property listings from zero" }
     ]
+  }
+];
+
+export const SIDE_PROJECTS: SideProject[] = [
+  {
+    id: "ziling-village",
+    label: "PERSONAL PROJECT · 2026",
+    title: "Ziling Village",
+    hanzi: "字灵村",
+    summary: "A cosy browser game for learning HSK 1 Mandarin. An old calligrapher's brush spilled its magic over a Jiangnan water town, and the characters painted on its signs came alive as shy spirits. You befriend them by learning their words.",
+    decisions: [
+      "Support that fades: Every word moves through four mastery stages, and its pinyin fades word by word as you learn it.",
+      "Reviews built into the day: Each new day's requests are built from the words that are due for review, so practice arrives as chores around the village.",
+      "AI-made art, hand-directed: Every asset was generated with AI, then cut out, cleaned and placed with my own Python tools and a written set of art-direction rules."
+    ],
+    playUrl: "https://marcusw9.github.io/ziling-village/",
+    codeUrl: "https://github.com/MarcusW9/ziling-village",
+    note: "Best on desktop"
   }
 ];
 
