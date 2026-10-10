@@ -24,6 +24,11 @@ export interface CaseStudy {
     stat: string;
     label: string;
   }[];
+  /** Optional public source, e.g. press coverage */
+  link?: {
+    label: string;
+    url: string;
+  };
 }
 
 export interface SideProject {
@@ -50,23 +55,23 @@ export interface Principle {
 
 export const METRICS: MetricItem[] = [
   {
-    id: "gmv",
-    value: "£12m+",
-    label: "GMV",
+    id: "products",
+    value: "70k+",
+    label: "marketplace products",
     sublabel: "Argos Marketplace",
-    detail: "GMV since launch from Argos's first marketplace, which I led from vendor selection to go-live. It has also brought in over £1m in commission revenue."
+    detail: "Live products on Argos's first marketplace, up from around 1,000 at launch. Argos has publicly announced a push to more than 130,000 by the end of 2026."
   },
   {
     id: "savings",
-    value: "£300K",
-    label: "saved with an AI-built MVP",
+    value: "6 weeks",
+    label: "to an AI-built platform",
     sublabel: "Argos Labs",
-    detail: "Estimated engineering cost avoided by building an in-house partner platform in six weeks, which replaced 800 spreadsheet rows and any licence fees."
+    detail: "One PM and one engineer built an in-house partner platform with AI-led development, avoiding around £300K in build and licence costs and retiring an 800-row spreadsheet."
   },
   {
     id: "downloads",
     value: "160k+",
-    label: "app downloads",
+    label: "downloads, from MVP",
     sublabel: "YoungPlanet",
     detail: "A free app for parents to pass on outgrown children's items to families nearby, with more than 35,000 items listed across the UK."
   },
@@ -84,23 +89,27 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: "argos-marketplace",
     index: "01",
     client: "SAINSBURY'S · ARGOS",
-    role: "Lead Product Manager",
+    role: "Senior Product Manager · Marketplace lead",
     title: "Launching a marketplace inside a 50-year-old retailer",
     summary: "Argos had never sold third-party stock. I led the programme that gave it a seller platform, a catalogue model and a new commission revenue line.",
-    highlightMetric: "£12m+",
-    highlightLabel: "GMV since launch",
+    highlightMetric: "70k+",
+    highlightLabel: "products since launch",
     overview: "Argos wanted to grow its range without holding more stock, which meant building capabilities it had never run before: seller onboarding, product ingestion, marketplace orders and payouts.",
-    problem: "The investment case ran past £20m, and more than five delivery teams each owned a piece of the flow. Taxonomy was the one area we did not compromise on, because bad category data blocks search, browse and every seller who comes after.",
+    problem: "More than five delivery teams each owned a piece of the flow, and none of Argos's existing product systems were built for seller-supplied data. Taxonomy was the one area we did not compromise on, because bad category data blocks search, browse and every seller who comes after.",
     strategy: [
       "Buy over build: I wrote the procurement RFP and led the vendor evaluation, landing on Mirakl. Buying the platform gave up some control of the roadmap in exchange for launch speed.",
-      "Connect sellers sooner: I pushed for iPaaS integration over a long internal build, and aligned API schemas and system behaviour with Engineering and Architecture.",
-      "Settle data ownership early: I ran workshops on who owns each core flow, then cut the MVP to what launch actually needed."
+      "Design data for sellers: I recommended a Mandatory+ attribute model and Google Taxonomy, so sellers could onboard with a structure they already knew while Argos still got the data its downstream systems needed.",
+      "Scale without breaking things: I designed a gated category expansion process and caught risks before customers did, such as a pricing flow that ran discount campaigns a day too long because it worked in dates, not times."
     ],
     outcomes: [
-      { stat: "£12m+", label: "GMV since launch" },
-      { stat: "£1m+", label: "Commission revenue" },
-      { stat: "20k", label: "New SKUs on Argos channels" }
-    ]
+      { stat: "70k+", label: "Live marketplace products" },
+      { stat: "130k+", label: "Announced range target for 2026" },
+      { stat: "5+", label: "Delivery teams aligned on one flow" }
+    ],
+    link: {
+      label: "Read the announcement",
+      url: "https://www.retailgazette.co.uk/blog/2026/10/argos-marketplace-range-push/"
+    }
   },
   {
     id: "argos-labs",
@@ -110,7 +119,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Build, don't buy: a partner platform in six weeks",
     summary: "As a founding member of Argos Labs, I replaced 800 spreadsheet rows with an in-house partner platform.",
     highlightMetric: "£300K",
-    highlightLabel: "engineering cost avoided",
+    highlightLabel: "build and licence cost avoided",
     overview: "Argos Labs is a small team Argos UK set up to solve business problems quickly with AI-led development. I joined as a founding member alongside my Marketplace role.",
     problem: "Hundreds of seller submissions arrived through forms and landed in large spreadsheets. Nobody clearly owned each stage, onboarding steps were missed and compliance tracking was manual. Commercial quotes ran to hundreds of thousands of pounds, with long integration timelines.",
     strategy: [
@@ -120,8 +129,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     outcomes: [
       { stat: "6 weeks", label: "From brief to working MVP" },
-      { stat: "£300K", label: "Estimated engineering cost avoided" },
-      { stat: "£0", label: "Licence fees, fully owned in-house" }
+      { stat: "£300K", label: "Estimated build and licence cost avoided" },
+      { stat: "100%", label: "Account team adoption, spreadsheet retired" }
     ]
   },
   {
@@ -211,6 +220,6 @@ export const PRINCIPLES: Principle[] = [
     hanzi: "取捨",
     summary: "AI can build almost anything. Deciding what is worth building is still ours.",
     detail: "Now that AI takes on more of the building, I believe product management is closer to the business than ever before. The questions that matter most are commercial ones: where the revenue comes from, what it costs to get there, and which trade-offs the business can live with. AI can model the options, but it cannot own the decision (or the consequences of getting it wrong).",
-    inPractice: "Start with the numbers, then the features. On the Argos Marketplace, I prepared the vendor cost estimates behind director-level business cases for an investment of over £20m. We chose to buy the platform rather than build it, trading some control of the roadmap for launch speed, and it has since delivered over £12m in GMV and £1m in commission revenue."
+    inPractice: "Start with the numbers, then the features. On the Argos Marketplace, I prepared the vendor cost estimates behind director-level business cases. We chose to buy the platform rather than build it, trading some control of the roadmap for launch speed, and the marketplace has since grown to more than 70,000 products."
   }
 ];
