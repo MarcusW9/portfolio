@@ -48,7 +48,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="text-left group cursor-pointer focus-visible:outline-none"
           >
-            <span className="font-serif text-lg md:text-xl font-medium tracking-tight text-[#1B1917] group-hover:text-[#B23A2A] transition-colors">
+            <span className="hidden sm:inline font-serif text-lg md:text-xl font-medium tracking-tight text-[#1B1917] group-hover:text-[#B23A2A] transition-colors">
               Marcus Wong
             </span>
           </button>
@@ -57,7 +57,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         {/* Zone 2: Navigation Links (Pure typography, no pill enclosures) */}
         <nav
           aria-label="Main Navigation"
-          className="flex items-center gap-7 md:gap-10 text-[11px] md:text-xs tracking-[0.2em] font-medium uppercase text-[#555047]"
+          className="flex items-center gap-5 sm:gap-7 md:gap-10 text-[10px] sm:text-[11px] md:text-xs tracking-[0.2em] font-medium uppercase text-[#555047]"
         >
           <button
             onClick={() => scrollToSection('work')}
@@ -77,7 +77,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 
           <button
             onClick={() => scrollToSection('about')}
-            className="relative py-1 hover:text-[#1B1917] transition-colors cursor-pointer group hidden sm:inline-block"
+            className="relative py-1 hover:text-[#1B1917] transition-colors cursor-pointer group"
           >
             <span>STORY</span>
             <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#1B1917] transition-all duration-300 group-hover:w-full" />

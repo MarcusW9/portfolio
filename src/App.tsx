@@ -40,7 +40,8 @@ export default function App() {
       <InkDiffusionCanvas enabled={true} />
 
       {/* Fluid Calligraphic Scroll Ribbon (Directly echoing Image 3) */}
-      <div className="fixed right-0 md:right-4 top-0 bottom-0 w-16 md:w-24 pointer-events-none z-20">
+      {/* Hidden on phones, where it overlapped the body text */}
+      <div className="hidden md:block fixed right-0 md:right-4 top-0 bottom-0 w-16 md:w-24 pointer-events-none z-20">
         <FluidScrollRibbon className="w-full h-full" />
       </div>
 
