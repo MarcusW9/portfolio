@@ -2,9 +2,11 @@ import React from 'react';
 import { SIDE_PROJECTS } from '../data/portfolioData.ts';
 import { BrushDivider } from './BrushDivider.tsx';
 import zilingVillage from '../assets/images/ziling-village.jpg';
+import launchReadiness from '../assets/images/launch-readiness.jpg';
 
 const SCREENSHOTS: Record<string, string> = {
   'ziling-village': zilingVillage,
+  'launch-readiness': launchReadiness,
 };
 
 export const SideProjects: React.FC = () => {
@@ -20,7 +22,7 @@ export const SideProjects: React.FC = () => {
             </h2>
           </div>
           <span className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-[#7E786E] font-medium">
-            BUILT FOR FUN
+            BUILT HANDS-ON
           </span>
         </div>
 
@@ -38,8 +40,13 @@ export const SideProjects: React.FC = () => {
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl leading-tight font-normal text-[#1B1917] mb-4">
-                {project.title}{' '}
-                <span lang="zh-Hans" className="text-[#7E786E]">{project.hanzi}</span>
+                {project.title}
+                {project.hanzi ? (
+                  <>
+                    {' '}
+                    <span lang="zh-Hans" className="text-[#7E786E]">{project.hanzi}</span>
+                  </>
+                ) : null}
               </h3>
 
               <p className="text-sm md:text-[15px] leading-relaxed text-[#555047] font-light mb-6 max-w-xl">
@@ -71,16 +78,18 @@ export const SideProjects: React.FC = () => {
                   rel="noreferrer noopener"
                   className="pb-1 border-b border-[#1B1917] text-[#1B1917] hover:text-[#B23A2A] hover:border-[#B23A2A] transition-colors"
                 >
-                  PLAY THE GAME ↗
+                  {project.playLabel.toUpperCase()} ↗
                 </a>
-                <a
-                  href={project.codeUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="pb-1 border-b border-[#1B1917]/30 text-[#655E54] hover:text-[#1B1917] hover:border-[#1B1917] transition-colors"
-                >
-                  GITHUB ↗
-                </a>
+                {project.codeUrl ? (
+                  <a
+                    href={project.codeUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="pb-1 border-b border-[#1B1917]/30 text-[#655E54] hover:text-[#1B1917] hover:border-[#1B1917] transition-colors"
+                  >
+                    GITHUB ↗
+                  </a>
+                ) : null}
                 <span className="text-[#7E786E] font-medium normal-case tracking-normal">
                   {project.note}
                 </span>
@@ -92,12 +101,12 @@ export const SideProjects: React.FC = () => {
               href={project.playUrl}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label={`Play ${project.title}`}
+              aria-label={`${project.playLabel}: ${project.title}`}
               className="lg:col-span-6 order-first lg:order-none group block"
             >
               <img
                 src={SCREENSHOTS[project.id]}
-                alt={`${project.title}: a pixel-art Jiangnan water town with a canal, stone bridge, tea house, market stalls and villagers`}
+                alt={project.imageAlt}
                 loading="lazy"
                 className="w-full h-auto rounded-sm border border-[#1B1917]/15 shadow-sm transition-transform duration-500 group-hover:-translate-y-1"
               />
