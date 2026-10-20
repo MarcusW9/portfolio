@@ -157,9 +157,9 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactClick }) => {
             {/* Tagline Statement */}
             <div data-hero="tagline">
               <p className="font-serif text-xl sm:text-2xl md:text-[1.65rem] text-[#332E29] leading-snug font-normal mt-5 mb-8 max-w-lg">
-                A product builder at the intersection
-                <br />
-                of AI and design.
+                I launch marketplaces and 0-to-1 products,
+                <br className="hidden sm:inline" />
+                {' '}increasingly built with AI.
               </p>
 
               {/* Minimal Underlined Actions */}

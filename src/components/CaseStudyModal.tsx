@@ -139,8 +139,20 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ study, onClose }
             </div>
           </div>
 
-          {/* Close Action Button */}
-          <div className="pt-6 flex justify-end">
+          {/* Close Action Button (plus optional public source link) */}
+          <div className={`pt-6 flex items-center gap-6 ${study.link ? 'justify-between' : 'justify-end'}`}>
+            {study.link && (
+              <a
+                href={study.link.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group relative pb-1 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-[#655E54] hover:text-[#1B1917] transition-colors inline-flex items-center gap-1"
+              >
+                <span>{study.link.label}</span>
+                <span className="text-xs leading-none">↗</span>
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#1B1917]/30 group-hover:bg-[#1B1917] transition-colors" />
+              </a>
+            )}
             <button
               type="button"
               onClick={onClose}
