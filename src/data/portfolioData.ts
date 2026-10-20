@@ -202,7 +202,7 @@ export const SIDE_PROJECTS: SideProject[] = [
       "Three statuses instead of hundreds of columns: Every product is On Track, Information Incomplete or At Risk, worked out from the data rather than typed in by hand. In the show-and-tell this summary got the strongest response, because the spreadsheet never showed what was actually a problem.",
       "Built from the feedback: I turned the show-and-tell into version 4: a critical path filter, a Studio view with a CSV export for planning shoots, and a permanent notes log. One rule shaped every change: do not recreate the spreadsheet on the main screen."
     ],
-    playUrl: "https://launch-readiness-marcuswong-1944s-projects.vercel.app",
+    playUrl: "https://launch-readiness-omega.vercel.app",
     playLabel: "Try the prototype",
     codeUrl: "https://github.com/MarcusW9/launch-readiness",
     note: "Fictional demo data",
