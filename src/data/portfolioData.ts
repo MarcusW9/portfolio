@@ -176,22 +176,6 @@ export const CASE_STUDIES: CaseStudy[] = [
 
 export const SIDE_PROJECTS: SideProject[] = [
   {
-    id: "launch-readiness",
-    label: "WORK PROTOTYPE · 2026",
-    title: "Launch Readiness",
-    summary: "A working prototype that answers one question for every new product: is it ready to launch, and if not, what is stopping it? Launch readiness lived in a large shared spreadsheet that every team relied on but nobody could read at a glance. The prototype won buy-in from the teams who would use it and started a conversation that did not exist before. Next, I am taking it back to my own team. This is a generic rebuild with a fictional retailer and data.",
-    decisions: [
-      "Discovery changed the product: My first version tried to run each team's workflow. Discovery showed that downstream teams already track their work in their own systems, so I rebuilt it around what they could not see: whether the information they need is complete, and whether the launch date is still realistic once their SLA is counted.",
-      "Three statuses instead of hundreds of columns: Every product is On Track, Information Incomplete or At Risk, worked out from the data rather than typed in by hand. In the show-and-tell this summary got the strongest response, because the spreadsheet never showed what was actually a problem.",
-      "Built from the feedback: I turned the show-and-tell into version 4: a critical path filter, a Studio view with a CSV export for planning shoots, and a permanent notes log. One rule shaped every change: do not recreate the spreadsheet on the main screen."
-    ],
-    playUrl: "https://product-induction.vercel.app",
-    playLabel: "Try the prototype",
-    codeUrl: "https://github.com/MarcusW9/launch-readiness",
-    note: "Fictional demo data",
-    imageAlt: "Launch Readiness overview: status cards for 16 products (3 at risk, 3 information incomplete, 10 on track) above a table of the most urgent launches"
-  },
-  {
     id: "ziling-village",
     label: "PERSONAL PROJECT · 2026",
     title: "Ziling Village",
@@ -207,6 +191,22 @@ export const SIDE_PROJECTS: SideProject[] = [
     codeUrl: "https://github.com/MarcusW9/ziling-village",
     note: "Best on desktop",
     imageAlt: "Ziling Village: a pixel-art Jiangnan water town with a canal, stone bridge, tea house, market stalls and villagers"
+  },
+  {
+    id: "launch-readiness",
+    label: "WORK PROTOTYPE · 2026",
+    title: "Launch Readiness",
+    summary: "A working prototype that answers one question for every new product: is it ready to launch, and if not, what is stopping it? It won buy-in from the teams who would use it and started a conversation that did not exist before. Shown here as a generic rebuild with fictional data.",
+    decisions: [
+      "Discovery changed the product: My first version tried to run each team's workflow. Discovery showed that downstream teams already track their work in their own systems, so I rebuilt it around what they could not see: whether the information they need is complete, and whether the launch date is still realistic once their SLA is counted.",
+      "Three statuses instead of hundreds of columns: Every product is On Track, Information Incomplete or At Risk, worked out from the data rather than typed in by hand. In the show-and-tell this summary got the strongest response, because the spreadsheet never showed what was actually a problem.",
+      "Built from the feedback: I turned the show-and-tell into version 4: a critical path filter, a Studio view with a CSV export for planning shoots, and a permanent notes log. One rule shaped every change: do not recreate the spreadsheet on the main screen."
+    ],
+    playUrl: "https://launch-readiness-omega.vercel.app",
+    playLabel: "Try the prototype",
+    codeUrl: "https://github.com/MarcusW9/launch-readiness",
+    note: "Fictional demo data",
+    imageAlt: "Launch Readiness overview: status cards for 16 products (3 at risk, 3 information incomplete, 10 on track) and a banner saying 6 products need attention"
   }
 ];
 

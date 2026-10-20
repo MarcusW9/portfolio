@@ -90,7 +90,7 @@ export const SideProjects: React.FC = () => {
                     GITHUB ↗
                   </a>
                 ) : null}
-                <span className="text-[#7E786E] font-medium normal-case tracking-normal">
+                <span className="basis-full sm:basis-auto text-[#7E786E] font-medium normal-case tracking-normal">
                   {project.note}
                 </span>
               </div>
