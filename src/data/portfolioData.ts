@@ -196,7 +196,7 @@ export const SIDE_PROJECTS: SideProject[] = [
     id: "launch-readiness",
     label: "WORK PROTOTYPE · 2026",
     title: "Launch Readiness",
-    summary: "A working prototype that answers one question for every new product: is it ready to launch, and if not, what is stopping it? Launch readiness lived in a large shared spreadsheet that every team relied on but nobody could read at a glance. The prototype won buy-in from the teams who would use it and started a conversation that did not exist before. Next, I am taking it back to my own team. This is a generic rebuild with a fictional retailer and data.",
+    summary: "A working prototype that answers one question for every new product: is it ready to launch, and if not, what is stopping it? It won buy-in from the teams who would use it and started a conversation that did not exist before. Shown here as a generic rebuild with fictional data.",
     decisions: [
       "Discovery changed the product: My first version tried to run each team's workflow. Discovery showed that downstream teams already track their work in their own systems, so I rebuilt it around what they could not see: whether the information they need is complete, and whether the launch date is still realistic once their SLA is counted.",
       "Three statuses instead of hundreds of columns: Every product is On Track, Information Incomplete or At Risk, worked out from the data rather than typed in by hand. In the show-and-tell this summary got the strongest response, because the spreadsheet never showed what was actually a problem.",
@@ -206,7 +206,7 @@ export const SIDE_PROJECTS: SideProject[] = [
     playLabel: "Try the prototype",
     codeUrl: "https://github.com/MarcusW9/launch-readiness",
     note: "Fictional demo data",
-    imageAlt: "Launch Readiness overview: status cards for 16 products (3 at risk, 3 information incomplete, 10 on track) above a table of the most urgent launches"
+    imageAlt: "Launch Readiness overview: status cards for 16 products (3 at risk, 3 information incomplete, 10 on track) and a banner saying 6 products need attention"
   }
 ];
 
