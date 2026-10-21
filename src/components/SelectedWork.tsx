@@ -80,6 +80,8 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectCaseStudy })
                       {/* Clean unboxed metadata separator */}
                       <div className="text-[10px] tracking-[0.25em] uppercase font-semibold text-[#7E786E] mb-2.5 flex items-center gap-2">
                         <span>{study.client}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>{study.period}</span>
                         {isHovered && (
                           <span className="w-1.5 h-1.5 rounded-full bg-[#B23A2A] animate-ping" />
                         )}

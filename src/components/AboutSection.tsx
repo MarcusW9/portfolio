@@ -30,7 +30,11 @@ export const AboutSection: React.FC = () => {
 
           <div className="lg:col-span-4 flex flex-col justify-end">
             <p className="text-sm md:text-[15px] leading-relaxed text-[#555047] font-light max-w-md">
-              Senior Product Manager in London. Marketplaces, 0→1 platforms and AI-led delivery, from a 50-year-old retailer&apos;s first marketplace to a six-week AI-built platform.
+              Senior Product Manager in London. Marketplaces, 0→1 platforms and AI-led delivery, from a 50-year-old retailer&apos;s first marketplace to a six-week AI-built platform. I also prototype with AI to test ideas with the people who will use them before committing engineering time (see{' '}
+              <a href="#projects" className="underline decoration-[#1B1917]/30 underline-offset-4 hover:text-[#1B1917] hover:decoration-[#B23A2A] transition-colors">
+                Launch Readiness
+              </a>
+              ).
             </p>
           </div>
         </div>
