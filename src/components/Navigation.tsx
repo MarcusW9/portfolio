@@ -68,6 +68,14 @@ export const Navigation: React.FC<NavigationProps> = ({
           </button>
 
           <button
+            onClick={() => scrollToSection('projects')}
+            className="relative py-1 hover:text-[#1B1917] transition-colors cursor-pointer group"
+          >
+            <span>PROJECTS</span>
+            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#1B1917] transition-all duration-300 group-hover:w-full" />
+          </button>
+
+          <button
             onClick={() => scrollToSection('approach')}
             className="relative py-1 hover:text-[#1B1917] transition-colors cursor-pointer group"
           >
@@ -75,13 +83,6 @@ export const Navigation: React.FC<NavigationProps> = ({
             <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#1B1917] transition-all duration-300 group-hover:w-full" />
           </button>
 
-          <button
-            onClick={() => scrollToSection('about')}
-            className="relative py-1 hover:text-[#1B1917] transition-colors cursor-pointer group"
-          >
-            <span>STORY</span>
-            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#1B1917] transition-all duration-300 group-hover:w-full" />
-          </button>
 
           <button
             onClick={onContactClick}

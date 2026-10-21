@@ -46,10 +46,12 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ study, onClose }
       <div className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#F2EDE4] border border-[#1B1917]/15 shadow-2xl p-6 sm:p-10 md:p-14 text-[#1B1917] bg-parchment-texture animate-sword-cut">
         {/* Top bar with unboxed category & close action */}
         <div className="flex items-center justify-between pb-6 border-b border-[#1B1917]/10">
-          <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase font-semibold text-[#7E786E]">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] tracking-[0.25em] uppercase font-semibold text-[#7E786E]">
             <span>{study.client}</span>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <span>{study.role}</span>
+            <span aria-hidden="true">·</span>
+            <span>{study.period}</span>
           </div>
 
           <button
@@ -139,9 +141,29 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ study, onClose }
             </div>
           </div>
 
+          {/* Press card: independent public coverage */}
+          {study.link?.headline && (
+            <a
+              href={study.link.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group block border-l-2 border-[#B23A2A] bg-[#EAE3D6]/50 px-5 py-5 sm:px-6 hover:bg-[#EAE3D6] transition-colors"
+            >
+              <span className="block text-[10px] tracking-[0.25em] uppercase font-semibold text-[#7E786E] mb-2">
+                In the press · {study.link.source} · {study.link.date}
+              </span>
+              <span className="block font-serif text-xl sm:text-2xl leading-snug text-[#1B1917] mb-3 [text-wrap:balance]">
+                &ldquo;{study.link.headline}&rdquo;
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#655E54] group-hover:text-[#1B1917] transition-colors">
+                {study.link.label} <span className="text-xs leading-none">↗</span>
+              </span>
+            </a>
+          )}
+
           {/* Close Action Button (plus optional public source link) */}
-          <div className={`pt-6 flex items-center gap-6 ${study.link ? 'justify-between' : 'justify-end'}`}>
-            {study.link && (
+          <div className={`pt-6 flex items-center gap-6 ${study.link && !study.link.headline ? 'justify-between' : 'justify-end'}`}>
+            {study.link && !study.link.headline && (
               <a
                 href={study.link.url}
                 target="_blank"
