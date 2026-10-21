@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { SealChop } from './SealChop.tsx';
 
+// Assembled at runtime so the address is not sitting in the static HTML for scrapers
+const EMAIL = ['marcus', 'wsy', 'wong', '@', 'gmail', '.', 'com'].join('');
+
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
     // Dynamically assemble address to prevent bot scrapers from harvesting static text/href
-    const parts = ['marcus', 'wsy', 'wong', '@', 'gmail', '.', 'com'];
-    navigator.clipboard.writeText(parts.join(''));
+    navigator.clipboard.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2600);
   };
@@ -26,6 +28,13 @@ export const ContactSection: React.FC = () => {
             <p className="font-serif text-xl sm:text-2xl text-[#454038] font-light max-w-lg mb-8 leading-snug">
               Open to Senior, Lead and Head of Product roles.
             </p>
+
+            <a
+              href={`mailto:${EMAIL}`}
+              className="inline-block font-serif text-lg sm:text-2xl text-[#1B1917] border-b border-[#1B1917]/30 hover:text-[#B23A2A] hover:border-[#B23A2A] transition-colors mb-8 break-all"
+            >
+              {EMAIL}
+            </a>
 
             {/* Social & Profile Links */}
             <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-[11px] sm:text-xs tracking-[0.22em] uppercase font-semibold text-[#1B1917]">

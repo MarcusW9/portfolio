@@ -11,6 +11,8 @@ export interface CaseStudy {
   index: string;
   client: string;
   role: string;
+  /** When I did this work, e.g. "2025 – Present" */
+  period: string;
   title: string;
   summary: string;
   highlightMetric: string;
@@ -28,6 +30,10 @@ export interface CaseStudy {
   link?: {
     label: string;
     url: string;
+    /** If set, the link renders as a press card */
+    source?: string;
+    date?: string;
+    headline?: string;
   };
 }
 
@@ -94,6 +100,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     index: "01",
     client: "SAINSBURY'S · ARGOS",
     role: "Senior Product Manager · Marketplace lead",
+    period: "2025 – Present",
     title: "Launching a marketplace inside a 50-year-old retailer",
     summary: "Argos had never sold third-party stock. I led the programme that gave it a seller platform, a catalogue model and a new commission revenue line.",
     highlightMetric: "70k+",
@@ -111,8 +118,11 @@ export const CASE_STUDIES: CaseStudy[] = [
       { stat: "5+", label: "Delivery teams aligned on one flow" }
     ],
     link: {
-      label: "Read the announcement",
-      url: "https://www.retailgazette.co.uk/blog/2026/10/argos-marketplace-range-push/"
+      label: "Read the article",
+      url: "https://www.retailgazette.co.uk/blog/2026/10/argos-marketplace-range-push/",
+      source: "Retail Gazette",
+      date: "Oct 2026",
+      headline: "Argos expands marketplace to 130,000 products in biggest range push"
     }
   },
   {
@@ -120,6 +130,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     index: "02",
     client: "SAINSBURY'S · ARGOS LABS",
     role: "Senior Product Manager · Founding member",
+    period: "2025 – Present",
     title: "Build, don't buy: a partner platform in six weeks",
     summary: "As a founding member of Argos Labs, I replaced 800 spreadsheet rows with an in-house partner platform.",
     highlightMetric: "£300K",
@@ -142,6 +153,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     index: "03",
     client: "YOUNGPLANET",
     role: "Product Lead",
+    period: "2022 – 2025",
     title: "Turning a free parents' app into a business",
     summary: "Growing the community, finding ways to earn from it, and taking it abroad.",
     highlightMetric: "160k+",
@@ -164,6 +176,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     index: "04",
     client: "MASHROOM",
     role: "Junior Product Manager · Second product hire",
+    period: "2020 – 2021",
     title: "From pre-revenue to 20,000 landlords and tenants",
     summary: "A PropTech start-up for DIY landlords with under 1,000 users and no revenue. In eleven months we shipped its first paid product and grew twentyfold.",
     highlightMetric: "20×",
